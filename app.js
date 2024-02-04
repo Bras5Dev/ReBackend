@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const universalMiddleware = require('./middleware/universalMiddleware');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('*', universalMiddleware);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
